@@ -82,7 +82,7 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddToggle({
-	Name = "Auto Punch",
+	Name = "Auto Stomp",
 	Default = false,
 	Callback = function(t3)
 	    _G.Stomp = t3
