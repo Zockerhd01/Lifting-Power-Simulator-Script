@@ -15,20 +15,18 @@ local Section = Tab:AddSection({
 Tab:AddButton({
 	Name = "AutoLift",
 	Callback = function()
-      		      _G.lift = true
-
-local Item = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
-
-while _G.lift == true do
-local args = {
-    [1] = "Lift",
-    [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item)
+     _G.lift = true
+    local Item = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+    while _G.lift == true do
+    local args = {
+        [1] = "Lift",
+        [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item)
 }
 
 game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item).Handler.Script.RemoteEvent:FireServer(unpack(args))
 wait(.4)
 end
-  	end    
+  	end   
 })
 
 local Section = Tab:AddSection({
@@ -51,4 +49,50 @@ game:GetService("ReplicatedStorage").Remotes.RemoteFunction:InvokeServer(unpack(
 wait(1)
 end
 	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Auto Punch"
+})
+
+Tab:AddToggle({
+	Name = "Auto Punch",
+	Default = false,
+	Callback = function(t2)
+	    _G.Punch = t2
+while _G.Punch == true do
+    local args = {
+        [1] = "UseCombat"
+    }
+    
+    game:GetService("Players").LocalPlayer.Character.Punch.LocalScript.Combat:FireServer(unpack(args))
+    wait()
+end
+    end    
+})
+
+local Section = Tab:AddSection({
+	Name = "Auto Stomp"
+})
+
+Tab:AddToggle({
+	Name = "Auto Punch",
+	Default = false,
+	Callback = function(t3)
+	    _G.Stomp = t3
+while _G.Stomp == true do
+    local args = {
+        [1] = "UseCombat"
+    }
+    
+    game:GetService("Players").LocalPlayer.Character.Stomp.LocalScript.Combat:FireServer(unpack(args))
+    wait()
+end
+    end    
 })
