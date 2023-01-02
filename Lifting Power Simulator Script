@@ -1,9 +1,9 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "L P S Semi-AutoFarm Made By 1234567#3209", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "L P S AutoFarm Made By 1234567#3209", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 local Tab = Window:MakeTab({
-	Name = "Semi-AutoFarm",
+	Name = "AutoFarm",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -12,12 +12,13 @@ local Section = Tab:AddSection({
 	Name = "Auto Lift YOU NEED TO PRESS IT EVERY TIME U GET A NEW ITEM"
 })
 
-Tab:AddButton({
+Tab:AddToggle({
 	Name = "AutoLift",
-	Callback = function()
-     _G.lift = true
-    local Item = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+	Default = false,
+	Callback = function(a)
+     _G.lift = a
     while _G.lift == true do
+    local Item = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
     local args = {
         [1] = "Lift",
         [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item)
