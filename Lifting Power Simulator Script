@@ -9,24 +9,33 @@ local Tab = Window:MakeTab({
 })
 
 local Section = Tab:AddSection({
-	Name = "Auto Lift YOU NEED TO PRESS IT EVERY TIME U GET A NEW ITEM"
+	Name = "Auto Lift"
 })
+
+local Item
 
 Tab:AddToggle({
 	Name = "AutoLift",
 	Default = false,
 	Callback = function(a)
-     _G.lift = a
-    while _G.lift == true do
-    local Item = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
-    local args = {
-        [1] = "Lift",
-        [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item)
-}
-
-game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item).Handler.Script.RemoteEvent:FireServer(unpack(args))
-wait(.4)
-end
+        _G.lift = a
+        while _G.lift == true do
+        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v:IsA("Tool") and v.Name then
+                Item = v.Name
+            end
+        end
+        
+        if game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item).Handler then
+            local args = {
+                    [1] = "Lift",
+                    [2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item)
+            }
+            
+            game:GetService("Players").LocalPlayer.Character:FindFirstChild(Item):WaitForChild("Handler").Script.RemoteEvent:FireServer(unpack(args))
+            end
+        wait(0.5)
+        end
   	end   
 })
 
